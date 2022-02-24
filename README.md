@@ -1,4 +1,4 @@
-# Rockelivery
+# Rockelivery 🍔
 
 To start your Phoenix server:
 
