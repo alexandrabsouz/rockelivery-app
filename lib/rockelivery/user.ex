@@ -5,7 +5,7 @@ defmodule Rockelivery.User do
 
     alias Ecto.Changeset
 
-    @primery_key {:id, :binary_id, autogenerate: true}
+    @primary_key {:id, :binary_id, autogenerate: true}
 
     @required_params [:age, :address, :cep, :cpf, :email, :password, :name]
 
