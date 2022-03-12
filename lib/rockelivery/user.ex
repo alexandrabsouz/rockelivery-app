@@ -9,6 +9,8 @@ defmodule Rockelivery.User do
 
     @required_params [:age, :address, :cep, :cpf, :email, :password, :name]
 
+    @derive {Jason.Encoder, only: [:id, :age, :address, :cpf, :email]}
+
     schema "users" do
         field :age, :integer
         field :address, :string
@@ -43,4 +45,4 @@ defmodule Rockelivery.User do
     defp put_password_hash(changeset), do: changeset
 end
 
-# user_params = %{age: 23, address: "Rua do Sol nascente", cep: "4567675", email: "ale@email.com", password_hash: "teste", name: "alexandra xxx"}
+# user_params = %{age: 23, address: "Rua do Sol nascente", cep: "4567675", email: "ale@email.com", password: "teste", name: "alexandra xxx"}
