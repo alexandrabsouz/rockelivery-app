@@ -1,5 +1,6 @@
 defmodule Rockelivery.Users.Delete do
   alias Ecto.UUID
+
   alias Rockelivery.{
     Error,
     Repo,
