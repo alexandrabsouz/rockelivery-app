@@ -12,7 +12,7 @@ defmodule Rockelivery.Users.CreateTest do
     end
 
     test "when params are a invalid changeseat, returns an error" do
-      params = build(:user_params, %{age: 15})
+      params = build(:user_params, %{"age" => 15})
       assert {:error, %Error{status: :bad_request, result: result}} = Create.call(params)
       assert errors_on(result) == %{age: ["must be greater than or equal to 18"]}
     end
