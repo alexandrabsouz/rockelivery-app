@@ -24,7 +24,7 @@ defmodule RockeliveryWeb.UsersControllerTest do
              } = response
     end
 
-    test "when there is somo error, returns the error", %{conn: conn} do
+    test "when there is some error, returns the error", %{conn: conn} do
       params = %{
         "password" => "555555555",
         "name" => "Alexandra"
