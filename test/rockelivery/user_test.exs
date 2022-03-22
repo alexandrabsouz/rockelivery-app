@@ -36,7 +36,10 @@ defmodule Rockelivery.UserTest do
 
       response = User.changeset(params)
 
-      expected_response = %{age: ["must be greater than or equal to 18"], password: ["should be at least 6 character(s)"]}
+      expected_response = %{
+        age: ["must be greater than or equal to 18"],
+        password: ["should be at least 6 character(s)"]
+      }
 
       assert errors_on(response) == expected_response
     end
