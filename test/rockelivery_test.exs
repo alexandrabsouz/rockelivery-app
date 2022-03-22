@@ -35,10 +35,28 @@ defmodule RockeliveryTest do
     end
 
     test "when user not found, returns an error" do
-        id = "a8a8ef77-7eb9-4944-b163-842137ca6968"
-        insert(:user)
+      id = "a8a8ef77-7eb9-4944-b163-842137ca6968"
+      insert(:user)
 
-        assert {:error, %Error{result: "user not found.", status: :not_found}} = Rockelivery.delete_user(id)
+      assert {:error, %Error{result: "user not found.", status: :not_found}} =
+               Rockelivery.delete_user(id)
+    end
+  end
+
+  describe "get_user_by_id/1" do
+    test "when exists, returns an user" do
+      uuid = "a8a8ef77-7eb9-4944-b163-842137ca696c"
+      insert(:user)
+
+      assert {:ok, %User{name: "Alexandra Souza"}} = Rockelivery.get_user_by_id(uuid)
+    end
+
+    test "when not found user, returns an error" do
+      uuid = "a8a8ef77-7eb9-4944-b163-842137ca6960"
+      insert(:user)
+
+      assert {:error, %Error{result: "user not found.", status: :not_found}} =
+               Rockelivery.get_user_by_id(uuid)
     end
   end
 end
