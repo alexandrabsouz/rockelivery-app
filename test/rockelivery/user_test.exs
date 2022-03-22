@@ -8,31 +8,15 @@ defmodule Rockelivery.UserTest do
 
   describe "changeset/2" do
     test "when all params are valid, returns a valid changeset" do
-      params = %{
-        age: 23,
-        address: "Rua Lidio Pimenta de Figueiredo",
-        cep: "39690000",
-        cpf: "67454356789",
-        email: "alexandra@email.com",
-        password: "amarelo@45",
-        name: "Alexandra"
-      }
+      params = build(:user_params)
 
       response = User.changeset(params)
 
-      assert %Changeset{changes: %{name: "Alexandra"}, valid?: true} = response
+      assert %Changeset{changes: %{name: "Alexandra Souza"}, valid?: true} = response
     end
 
     test "when updating changeset, returns a valid changeset with given changes" do
-      params = %{
-        age: 23,
-        address: "Rua Lidio Pimenta de Figueiredo",
-        cep: "39690000",
-        cpf: "67454356789",
-        email: "alexandra@email.com",
-        password: "amarelo@45",
-        name: "Alexandra"
-      }
+      params = build(:user_params)
 
       update_params = %{
         name: "Julio",
@@ -48,19 +32,11 @@ defmodule Rockelivery.UserTest do
     end
 
     test "there are some error, returns a invalid changeset" do
-      params = %{
-        age: 13,
-        address: "Rua Lidio Pimenta de Figueiredo",
-        cep: "39690000",
-        cpf: "67454356789",
-        email: "alexandra@email.com",
-        password: "amarelo@45",
-        name: "Alexandra"
-      }
+      params = build(:user_params, %{age: 15, password: "123"})
 
       response = User.changeset(params)
 
-      expected_response = %{age: ["must be greater than or equal to 18"]}
+      expected_response = %{age: ["must be greater than or equal to 18"], password: ["should be at least 6 character(s)"]}
 
       assert errors_on(response) == expected_response
     end
