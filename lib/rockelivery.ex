@@ -13,5 +13,5 @@ defmodule Rockelivery do
   defdelegate update_user(params), to: UserUpdate, as: :call
 
   # Items
-  defdelegate create_item(params) to: ItemCreate, as: :call
+  defdelegate create_item(params), to: ItemCreate, as: :call
 end
