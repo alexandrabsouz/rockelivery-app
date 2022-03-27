@@ -1,22 +1,17 @@
 defmodule Rockelivery.Order do
   use Ecto.Schema
-
   import Ecto.Changeset
 
-  alias Ecto.Changeset
-
-  alias Rockelivery.{
-    User,
-    Item
-  }
+  alias Ecto.Enum
+  alias Rockelivery.{Item, User}
 
   @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
 
   @required_params [:address, :comments, :payment_method, :user_id]
-
-  @derive {Jason.Encoder, only: @required_params ++ [:id]}
-
   @payment_methods [:money, :credit_card, :debit_card]
+
+  @derive {Jason.Encoder, only: @required_params ++ [:id, :items]}
 
   schema "orders" do
     field :address, :string
