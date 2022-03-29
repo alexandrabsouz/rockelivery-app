@@ -21,5 +21,14 @@ defmodule Rockelivery.Orders.Create do
 
     query
     |> Repo.all()
+    |> validate_items(items_ids)
+  end
+
+  defp validate_items(items, items_ids) do
+    item_map = Map.new(items, fn item -> {item.id, item} end)
+
+    items_ids
+    |> Enum.map(fn id -> {id, Map.get(item_mao, id)} end)
+    |> Enum.any?({_id, value} -> is_nil(value) end)
   end
 end
