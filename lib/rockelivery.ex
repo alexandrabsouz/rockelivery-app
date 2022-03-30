@@ -18,5 +18,5 @@ defmodule Rockelivery do
   defdelegate create_item(params), to: ItemCreate, as: :call
 
   #Orders
-  defdelegate create_order(params) to: OrderCreate, as: :call
+  defdelegate create_order(params), to: OrderCreate, as: :call
 end
