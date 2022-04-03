@@ -54,7 +54,9 @@ defmodule Rockelivery.MixProject do
       {:pbkdf2_elixir, "~> 2.0"},
       {:excoveralls, "~> 0.14.4", only: :test},
       {:ex_machina, "~> 2.5.0"},
-      {:elixir_uuid, "~> 1.2"}
+      {:elixir_uuid, "~> 1.2"},
+      {:tesla, "~> 1.4"},
+      {:hackney, "~> 1.17"}
     ]
   end
 
