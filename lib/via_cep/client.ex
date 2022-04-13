@@ -10,10 +10,11 @@ defmodule ViaCep.Client do
   def get_cep_info(cep) do
     "#{cep}/json"
     |> get()
+    |> IO.inspect()
     |> handle_get()
   end
 
-  defp handle_get({:ok, %Env{status: 200, body: %{"erro" => "true"}}}) do
+  defp handle_get({:ok, %Env{status: 200, body: %{"erro" => true}}}) do
     {:error, Error.build(:not_found, "CEP not found")}
   end
 
