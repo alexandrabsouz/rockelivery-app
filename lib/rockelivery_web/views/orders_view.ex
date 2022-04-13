@@ -1,11 +1,11 @@
 defmodule RockeliveryWeb.OrdersView do
-    use RockeliveryWeb, :view
-    alias Rockelivery.Order
+  use RockeliveryWeb, :view
+  alias Rockelivery.Order
 
-    def render("create.json", %{order: %Order{} = order}) do
-      %{
-        message: "Order cerated!",
-        order: order
-      }
-    end
+  def render("create.json", %{order: %Order{} = order}) do
+    %{
+      message: "Order cerated!",
+      order: order
+    }
   end
+end
