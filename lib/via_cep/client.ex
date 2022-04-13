@@ -10,7 +10,6 @@ defmodule ViaCep.Client do
   def get_cep_info(cep) do
     "#{cep}/json"
     |> get()
-    |> IO.inspect()
     |> handle_get()
   end
 
