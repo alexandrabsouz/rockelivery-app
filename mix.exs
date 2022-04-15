@@ -56,7 +56,8 @@ defmodule Rockelivery.MixProject do
       {:ex_machina, "~> 2.5.0"},
       {:elixir_uuid, "~> 1.2"},
       {:tesla, "~> 1.4"},
-      {:hackney, "~> 1.17"}
+      {:hackney, "~> 1.17"},
+      {:bypass, "~> 2.1", only: :test}
     ]
   end
 
