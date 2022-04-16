@@ -18,8 +18,7 @@ config :rockelivery, RockeliveryWeb.Endpoint,
   http: [port: 4002],
   server: false
 
-config :rockelivery, Rockelivery.Users.Create,
-  via_cep_adapter: Rockelivery.ViaCep.ClientMock
+config :rockelivery, Rockelivery.Users.Create, via_cep_adapter: Rockelivery.ViaCep.ClientMock
 
 # Print only warnings and errors during test
 config :logger, level: :warn

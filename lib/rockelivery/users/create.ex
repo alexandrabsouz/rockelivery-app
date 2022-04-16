@@ -1,11 +1,5 @@
 defmodule Rockelivery.Users.Create do
-  alias Rockelivery.{
-    Error,
-    Repo,
-    User
-  }
-
-  alias Rockelivery.ViaCep.Client
+  alias Rockelivery.{Error, Repo, User}
 
   def call(params) do
     cep = Map.get(params, "cep")
@@ -22,6 +16,8 @@ defmodule Rockelivery.Users.Create do
   end
 
   defp client do
-    Application.fetch_env!(:rockelivery, __MODULE__)[:via_cep_adapter]
+    :rockelivery
+    |> Application.fetch_env!(__MODULE__)
+    |> Keyword.get(:via_cep_adapter)
   end
 end

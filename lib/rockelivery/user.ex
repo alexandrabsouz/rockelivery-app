@@ -1,17 +1,15 @@
 defmodule Rockelivery.User do
   use Ecto.Schema
-
   import Ecto.Changeset
 
   alias Ecto.Changeset
-
   alias Rockelivery.Order
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
   @required_params [:age, :address, :cep, :cpf, :email, :password, :name]
 
-  @derive {Jason.Encoder, only: [:id, :age, :address, :cpf, :email]}
+  @derive {Jason.Encoder, only: [:id, :age, :cpf, :address, :email]}
 
   schema "users" do
     field :age, :integer
@@ -50,5 +48,3 @@ defmodule Rockelivery.User do
 
   defp put_password_hash(changeset), do: changeset
 end
-
-# user_params = %{age: 23, address: "Rua do Sol nascente", cep: "4567675", email: "ale@email.com", password: "teste", name: "alexandra xxx"}

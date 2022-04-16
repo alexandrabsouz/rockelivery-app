@@ -30,8 +30,7 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :rockelivery, Rockelivery.Users.Create,
-  via_cep_adapter: Rockelivery.ViaCep.Client
+config :rockelivery, Rockelivery.Users.Create, via_cep_adapter: Rockelivery.ViaCep.Client
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
