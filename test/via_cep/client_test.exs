@@ -1,22 +1,22 @@
 defmodule ViaCep.ClientTest do
   use ExUnit.Case
 
-    alias Plug.Conn
-    alias Rockelivery.Error
-    alias ViaCep.Client
+  alias Plug.Conn
+  alias Rockelivery.Error
+  alias ViaCep.Client
 
-    describe "get_cep_info/1" do
-        setup do
-        bypass = Bypass.open()
-        {:ok, bypass: bypass}
-        end
+  describe "get_cep_info/1" do
+    setup do
+      bypass = Bypass.open()
+      {:ok, bypass: bypass}
+    end
 
-        test "when there is valid cep, returns the cep info", %{bypass: bypass} do
-        cep = "01001000"
+    test "when there is valid cep, returns the cep info", %{bypass: bypass} do
+      cep = "01001000"
 
-        url = endpoint_url(bypass.port)
+      url = endpoint_url(bypass.port)
 
-        body = ~s({
+      body = ~s({
                     "cep": "01001-000",
                     "logradouro": "Praça da Sé",
                     "complemento": "lado ímpar",
@@ -29,73 +29,71 @@ defmodule ViaCep.ClientTest do
                     "siafi": "7107"
                 })
 
-        Bypass.expect(bypass, "GET", "#{cep}/json/", fn conn ->
-            conn
-            |> Conn.put_resp_header("content-type", "application/json")
-            |> Conn.resp(200, body)
-        end)
+      Bypass.expect(bypass, "GET", "#{cep}/json/", fn conn ->
+        conn
+        |> Conn.put_resp_header("content-type", "application/json")
+        |> Conn.resp(200, body)
+      end)
 
-        response = Client.get_cep_info(url, cep)
+      response = Client.get_cep_info(url, cep)
 
-        expected_response =
-            {:ok,
-            %{
-            "bairro" => "Sé",
-            "cep" => "01001-000",
-            "complemento" => "lado ímpar",
-            "ddd" => "11",
-            "gia" => "1004",
-            "ibge" => "3550308",
-            "localidade" => "São Paulo",
-            "logradouro" => "Praça da Sé",
-            "siafi" => "7107",
-            "uf" => "SP"
-            }}
+      expected_response =
+        {:ok,
+         %{
+           "bairro" => "Sé",
+           "cep" => "01001-000",
+           "complemento" => "lado ímpar",
+           "ddd" => "11",
+           "gia" => "1004",
+           "ibge" => "3550308",
+           "localidade" => "São Paulo",
+           "logradouro" => "Praça da Sé",
+           "siafi" => "7107",
+           "uf" => "SP"
+         }}
 
-        assert response == expected_response
-        end
+      assert response == expected_response
+    end
 
-        test "when the cep is inválid, returns an error", %{bypass: bypass} do
-        cep = "123"
+    test "when the cep is inválid, returns an error", %{bypass: bypass} do
+      cep = "123"
 
-        url = endpoint_url(bypass.port)
+      url = endpoint_url(bypass.port)
 
-        Bypass.expect(bypass, "GET", "#{cep}/json/", fn conn ->
-            conn
-            |> Conn.resp(500, "")
-        end)
+      Bypass.expect(bypass, "GET", "#{cep}/json/", fn conn ->
+        conn
+        |> Conn.resp(500, "")
+      end)
 
-        response = Client.get_cep_info(url, cep)
+      response = Client.get_cep_info(url, cep)
 
-        expected_response =
-            {:error, %Error{result: "inválid CEP", status: :bad_request}}
+      expected_response = {:error, %Error{result: "inválid CEP", status: :bad_request}}
 
-        assert response == expected_response
-        end
+      assert response == expected_response
+    end
 
+    test "when the cep not found, returns an error", %{bypass: bypass} do
+      cep = "00000000"
 
-        test "when the cep not found, returns an error", %{bypass: bypass} do
-            cep = "00000000"
-
-            body = ~s({
+      body = ~s({
                 "erro": true
             })
-    
-            url = endpoint_url(bypass.port)
-    
-            Bypass.expect(bypass, "GET", "#{cep}/json/", fn conn ->
-                conn
-                |> Conn.put_resp_header("content-type", "application/json")
-                |> Conn.resp(200, body)
-            end)
-    
-            response = Client.get_cep_info(url, cep)
-    
-            expected_response = {:error, %Error{result: "CEP not found", status: :not_found }}
-    
-            assert response == expected_response
-            end
 
-        defp endpoint_url(port), do: "http://localhost:#{port}/"
+      url = endpoint_url(bypass.port)
+
+      Bypass.expect(bypass, "GET", "#{cep}/json/", fn conn ->
+        conn
+        |> Conn.put_resp_header("content-type", "application/json")
+        |> Conn.resp(200, body)
+      end)
+
+      response = Client.get_cep_info(url, cep)
+
+      expected_response = {:error, %Error{result: "CEP not found", status: :not_found}}
+
+      assert response == expected_response
     end
-    end
+
+    defp endpoint_url(port), do: "http://localhost:#{port}/"
+  end
+end
