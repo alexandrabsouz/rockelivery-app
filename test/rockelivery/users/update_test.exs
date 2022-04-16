@@ -3,13 +3,8 @@ defmodule Rockelivery.Users.UpdateTest do
 
   import Rockelivery.Factory
 
-  alias Rockelivery.{
-    Error,
-    User
-  }
-
-  alias Rockelivery.Users.Create
-
+  alias Rockelivery.User
+  
   describe "call/1" do
     test "when all params are valid, update user" do
       uuid = "a8a8ef77-7eb9-4944-b163-842137ca696c"

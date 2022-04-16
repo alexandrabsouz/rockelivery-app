@@ -3,7 +3,7 @@ defmodule ViaCep.ClientTest do
 
   alias Plug.Conn
   alias Rockelivery.Error
-  alias ViaCep.Client
+  alias Rockelivery.ViaCep.Client
 
   describe "get_cep_info/1" do
     setup do

@@ -1,6 +1,7 @@
 defmodule RockeliveryTest do
   use Rockelivery.DataCase, async: True
 
+  import Mox
   import Rockelivery.Factory
 
   alias Rockelivery.{
@@ -8,11 +9,26 @@ defmodule RockeliveryTest do
     User
   }
 
-  alias Rockelivery.Users.Create
+  alias Rockelivery.ViaCep.ClientMock
 
   describe "create_user/1" do
     test "when all params are valid, returns an user" do
       user = build(:user_params)
+
+      expect(ClientMock, :get_cep_info, fn _cep ->  {:ok,
+      %{
+        "bairro" => "Sé",
+        "cep" => "01001-000",
+        "complemento" => "lado ímpar",
+        "ddd" => "11",
+        "gia" => "1004",
+        "ibge" => "3550308",
+        "localidade" => "São Paulo",
+        "logradouro" => "Praça da Sé",
+        "siafi" => "7107",
+        "uf" => "SP"
+      }} end)
+
       assert {:ok, %User{name: "Alexandra Souza"}} = Rockelivery.create_user(user)
     end
 
