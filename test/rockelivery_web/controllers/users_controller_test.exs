@@ -27,7 +27,8 @@ defmodule RockeliveryWeb.UsersControllerTest do
     test "when there is some error, returns the error", %{conn: conn} do
       params = %{
         "password" => "555555555",
-        "name" => "Alexandra"
+        "name" => "Alexandra",
+        "cep" => "39690000"
       }
 
       response =
@@ -39,7 +40,6 @@ defmodule RockeliveryWeb.UsersControllerTest do
         "message" => %{
           "address" => ["can't be blank"],
           "age" => ["can't be blank"],
-          "cep" => ["can't be blank"],
           "cpf" => ["can't be blank"],
           "email" => ["can't be blank"]
         }

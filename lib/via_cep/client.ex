@@ -25,6 +25,10 @@ defmodule ViaCep.Client do
     {:error, Error.build(:bad_request, "inválid CEP")}
   end
 
+  defp handle_get({:ok, %Env{status: 500, body: _body}}) do
+    {:error, Error.build(:bad_request, "inválid CEP")}
+  end
+
   defp handle_get({:error, reason}) do
     {:error, Error.build(:bad_request, reason)}
   end
