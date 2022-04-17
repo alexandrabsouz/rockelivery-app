@@ -16,6 +16,8 @@ defmodule RockeliveryWeb.Router do
 
     post "/items", ItemsController, :create
 
+    post "/users/signin", UsersController, :sign_in
+
     post "/orders", OrdersController, :create
   end
 

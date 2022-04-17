@@ -16,6 +16,14 @@ defmodule RockeliveryWeb.UsersController do
     end
   end
 
+  def sign_in(conn, params) do
+    with {:ok, token} <- Guardian.authenticate(params) do
+ conn
+ |> put_status(:ok)
+ |> render("sign_in.json", token: token)
+end
+  end
+
   def show(conn, %{"id" => id}) do
     with {:ok, %User{} = user} <- Rockelivery.get_user_by_id(id) do
       conn
