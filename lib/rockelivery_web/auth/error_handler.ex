@@ -1,5 +1,5 @@
 defmodule RockeliveryWeb.Auth.ErrorHandler do
-    import Plug.Conn
+  import Plug.Conn
 
   @behaviour Guardian.Plug.ErrorHandler
 
