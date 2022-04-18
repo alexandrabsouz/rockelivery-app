@@ -32,9 +32,14 @@ config :phoenix, :json_library, Jason
 
 config :rockelivery, Rockelivery.Users.Create, via_cep_adapter: Rockelivery.ViaCep.Client
 
+# Guardian
 config :rockelivery, RockeliveryWeb.Auth.Guardian,
   issuer: "rockelivery",
   secret_key: "+0D/e8dBgxsKhp9exop4dOEn1Llza8E5L1ah6in2nZXbQyKqeA9y4BEpZanYfnRQ"
+
+config :rockelivery, RockeliveryWeb.Auth.Pipeline,
+  module: RockeliveryWeb.Auth.Guardian,
+  error_handler: RockeliveryWeb.Auth.ErrorHandler
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
