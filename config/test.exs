@@ -7,18 +7,12 @@ use Mix.Config
 # Run `mix help test` for more information.
 config :rockelivery, Rockelivery.Repo,
   username: "postgres",
-  password: "LQS--log",
+  password: "postgres",
   database: "rockelivery_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
 # configure the database got Github Actions
-
-if System.get_env("GITHUB_ACTIONS") do
-  config :app, App.Repo,
-    username: "postgres"
-    password: "postgres"
-end
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :rockelivery, RockeliveryWeb.Endpoint,
