@@ -50,6 +50,16 @@ jobs:
     - name: Check Formatting
       run: mix format --check-formatted
 
+    - name: Check Coveralls
+      run: mix coveralls.json
+      env:
+        MIX_ENV: test
+
+    - name: Check COV Script
+      run: curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov ./codecov 
+      env: 
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
     - name: Install dependencies
       run: mix deps.get
     - name: Run tests
